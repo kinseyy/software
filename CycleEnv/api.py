@@ -7,6 +7,9 @@ from colorama import init, Fore
 import urllib.request
 
 dbg_pring = (Fore.CYAN + "[Debug]")
+dbg_pring_warnable = (Fore.YELLOW + "WARNING!")
+dbg_pring_trouble = (Fore.RED + "GYP ERR!")
+dbg_js_prefix = (Fore.MAGENTA + "HTTP:GET/nodejs")
 rst = (Fore.RESET + " ")
 
 class usercache:
@@ -20,5 +23,12 @@ def sleeper(s):
 
 def startup():
     if platform.system() == "Windows":
-        print(dbg_pring + rst + "")
+        print(dbg_pring + rst + "Windows OS is supported!")
+    else:
+        print(dbg_pring_warnable + " " + dbg_js_prefix + rst + "OS not supported.")
+        sleep(5)
+        exit()
+        
+
+
         
