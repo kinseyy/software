@@ -28,7 +28,7 @@ def startup():
         print(dbg_pring_warnable + " " + dbg_js_prefix + rst + "OS not supported.")
         sleep(5)
         exit()
-        
+
 
 
         
