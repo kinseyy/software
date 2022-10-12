@@ -1,3 +1,3 @@
-from api import *
+from api import intent
 
-startup()
+intent.wget("https://phylex.space")
