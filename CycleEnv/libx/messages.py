@@ -16,3 +16,5 @@ class package_messages:
           print(dbg_pring + rst + Back.RED + " Project compiled with error")
      def Forbidden(self, backage, sourcepeckt, usercache, loginas, saveentry, env, security_space):
           print("Not available now")
+     def addenv(self, from_srv_data):
+          print()
