@@ -4,7 +4,7 @@ import time
 import platform
 import requests
 import colorama
-from colorama import init, Fore
+from colorama import init, Fore, Back
 import urllib.request
 import paramiko
 
@@ -16,6 +16,19 @@ dbg_pring_warnable = (Fore.YELLOW + "WARNING!")
 dbg_pring_trouble = (Fore.RED + "GYP ERR!")
 dbg_js_prefix = (Fore.MAGENTA + "HTTP:GET/nodejs")
 rst = (Fore.RESET + " ")
+
+class package:
+    def register(pname, pversion, pauthor, ppath):
+        print(dbg_pring + Fore.GREEN + Back.WHITE + " Wrapping project.")
+    def goto(pname, ppath):
+        print(dbg_pring + rst + "Running function goto project.")
+        print(dbg_js_prefix + rst + "System is running")
+    def addenv(envname, envcore):
+        print()
+        print()
+    def remove(pname, ppath):
+
+
 
 class intent:
     def wget(filename):
@@ -42,9 +55,9 @@ def sleeper(s):
         time.sleep(1./10)
 
 def sshclient():
-    SSH_ADDRESS = "192.168.0.1"
-    SSH_USERNAME = "username"
-    SSH_PASSWORD = "password"
+    SSH_ADDRESS = "vmi.phylex.space"
+    SSH_USERNAME = "root"
+    SSH_PASSWORD = "4uMo7*Tg6lvsx75Z2W7QYGYs"
     SSH_COMMAND = "echo 'Hello World!'"
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -58,12 +71,7 @@ def sshclient():
     except Exception as e:
         sys.stderr.write("SSH connection error: {0}".format(e))
 
-    if ssh_stdout:
-        sys.stdout.write(ssh_stdout.read())
-    if ssh_stderr:
-        sys.stderr.write(ssh_stderr.read())
-
-
+sshclient()
 
 def startup():
     if platform.system() == "Windows":
@@ -72,4 +80,3 @@ def startup():
         print(dbg_pring_warnable + " " + dbg_js_prefix + rst + "OS not supported.")
         sleep(5)
         exit()
-
