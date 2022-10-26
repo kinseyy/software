@@ -11,10 +11,11 @@ rst = (Fore.RESET + " ")
 
 class package_messages:
      def register_message_success():
-          print(dbg_pring + rst + Back.GREEN + " Wrapping project")
+          print(dbg_pring + rst + Back.GREEN + "Wrapping project" + Back.RESET)
      def register_message_failure():
-          print(dbg_pring + rst + Back.RED + " Project compiled with error")
-     def Forbidden(self, backage, sourcepeckt, usercache, loginas, saveentry, env, security_space):
+          print(dbg_pring + rst + Back.RED + "Project compiled with error" + Back.RESET)
+     def Forbidden(self):
           print("Not available now")
      def addenv(self, from_srv_data):
           print()
+     register_message_failure()

@@ -1,32 +1,44 @@
-#   1. Install the paramikio module for python.
-#       pip install paramiko
-#   2. Edit the SSH details below.
-
 import paramiko
-import sys
+import platform
 
-## EDIT SSH DETAILS ##
+from colorama import init, Fore, Back
+init()
 
-SSH_ADDRESS = "192.168.0.1"
-SSH_USERNAME = "username"
-SSH_PASSWORD = "password"
-SSH_COMMAND = "echo 'Hello World!'"
+def checksys():
+     if platform.system() == "Windows":
+          print(Fore.GREEN + "Windows is supported")
+     else:
+          print(Fore.RED + platform.system() + " not supported")
+checksys()
 
-## CODE BELOW ##
+def cluster():
+     input("~ ")
 
-ssh = paramiko.SSHClient()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+def recovery(admin_hostname, admin_username, admin_password, user_for_recovery):
+     user_inputbox = str(input("New passphrase for recovery: "))
 
-ssh_stdin = ssh_stdout = ssh_stderr = None
+     client = paramiko.client.SSHClient()
+     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+     client.connect(admin_hostname, username=admin_username, password=admin_password)
+     stdin, stdout, stderr = client.exec_command('passwd ' + user_for_recovery)
+     stdin.write(user_inputbox + '\n')
+     stdin.write(user_inputbox + '\n')
+     stdin.flush()
 
-try:
-    ssh.connect(SSH_ADDRESS, username=SSH_USERNAME, password=SSH_PASSWORD)
-    ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command(SSH_COMMAND)
-    ssh_stdout.channel.recv_exit_status()
-except Exception as e:
-    sys.stderr.write("SSH connection error: {0}".format(e))
+     stdout.channel.set_combine_stderr(True)
+     print(stdout.read().decode())
+     client.close()
 
-if ssh_stdout:
-    sys.stdout.write(ssh_stdout.read())
-if ssh_stderr:
-    sys.stderr.write(ssh_stderr.read())
+def runcmd():
+     exec = input("Run command")
+     client = paramiko.client.SSHClient()
+     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+     client.connect(admin_hostname, username=admin_username, password=admin_password)
+     stdin, stdout, stderr = client.exec_command(exec)
+     stdin.write(user_inputbox + '\n')
+     stdin.write(user_inputbox + '\n')
+     stdin.flush()
+
+     stdout.channel.set_combine_stderr(True)
+     print(stdout.read().decode())
+     client.close()
